@@ -1,0 +1,8 @@
+#! /bin/bash
+tail -f $1 | sed -e "s/\\\t/ /g;s/\\\n/\\n/g;s/\\\r/ /g"
+
+# tail -f /var/log/apache2/error.log | sed -e "s/\\\t/ /g;s/\\\n/\\n/g"
+
+
+
+

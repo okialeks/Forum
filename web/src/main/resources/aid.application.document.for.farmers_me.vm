@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html>
+<head>
+	<meta charset="utf-8"></meta>
+	<style>
+		table {
+			border-left: solid 1px #000000;
+			border-top: solid 1px #000000;
+			border-collapse: collapse;
+			border-spacing: 0;
+		}
+		table tr {
+			page-break-inside: avoid;
+		}
+		table th {
+			 padding: 5px;
+			 border-right: solid 1px #000000;
+			 border-bottom: solid 1px #000000;
+		 }
+		table td {
+			  padding: 5px;
+			  border-right: solid 1px #000000;
+			  border-bottom: solid 1px #000000;
+		}
+		table th.title-cell {
+			font-size: 1.2em;
+			background-color: #ffd6e1;
+			padding: 10px 5px;
+			text-align: center;
+		}
+		.break { page-break-before: always; }
+		.farm-details table {
+			width: 100%;
+		}
+		.farm-details table td {
+			padding-left: 15px;
+		}
+		.parcel-details {
+			padding: 15px 0;
+		}
+		.parcel-details table {
+			width: 100%;
+		}
+		.parcel-details table .lpis-data {
+			background-color: #7fffd4;
+		}
+		.additional-payments {
+			padding-bottom: 15px;
+		}
+		.additional-payments table, .additional-payments table td {
+			border: 0;
+		}
+		.crop-area-sums table {
+			min-width: 50%;
+		}
+		.support-measure-legend {
+			padding: 15px 0;
+		}
+		.support-measure-legend table, .support-measure-legend table td, .support-measure-legend table th {
+			border: 0;
+		}
+		.single-animals {
+			padding: 15px 0;
+		}
+		.single-animals table {
+			width: 100%;
+		}
+		.animals-summary table {
+			min-width: 50%;
+		}
+
+		.general-statement {
+		}
+		.support-measure-statement {
+		}
+
+		.content {
+			page-break-after: auto;
+		}
+		.footer {
+			position: running(footer);
+			display: block;
+			padding-bottom: 15px;
+		}
+		.footer table {
+			width: 100%;
+			border: 0;
+		}
+		.footer table td {
+			border: 0;
+			text-align: center;
+			padding: 15px;
+		}
+		.footer table td .bottom-border {
+			border-bottom: 1px solid #000000;
+		}
+		#page-numbering {
+			position: running(page-numbering);
+		}
+		.page-number:before {
+			content: counter(page);
+		}
+		.page-count:before {
+			content: counter(pages);
+		}
+
+		@font-face {
+		    src: url('https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/ipwn/arialuni.ttf');
+			/*src: url('file:///Users/stojiljkovic/Downloads/arial-unicode-ms/ARIALUNI.TTF');*/
+		    -fs-pdf-font-embed: embed;
+		    -fs-pdf-font-encoding: Identity-H;
+		}
+		@page {
+			size: A4 landscape;
+			margin-bottom: 2cm;
+			@bottom-center {
+				content: element(footer);
+				padding-bottom: 20px;
+			}
+			@bottom-right {
+				content: element(page-numbering);
+				padding-bottom: 30px;
+			}
+		}
+
+		body {
+			font-family: Arial Unicode MS, Lucida Sans Unicode, Arial, verdana, arial, helvetica, sans-serif;
+			font-size: 12px;
+		}
+	</style>
+</head>
+<body>
+<div class="footer">
+	<table>
+		<tr>
+			<td width="25%"><div class="bottom-border">$dateTool.format("dd.MM.yyyy", $dateTool.getDate())</div><div>Datum podnošenja zahtjeva</div> </td>
+			<td></td>
+			<td width="25%"><div class="bottom-border">&nbsp;</div><div>Potpis podnosioca zahtjeva</div> </td>
+			<td></td>
+			<td width="25%"><div class="bottom-border">&nbsp;</div><div>Potpis službenika</div> </td>
+			<td></td>
+		</tr>
+	</table>
+</div>
+<div id="page-numbering">
+	<span class="page-number"></span>/<span class="page-count"></span>
+</div>
+<div class="content">
+<div class="farm-details">
+	<table>
+		<thead>
+		<tr>
+			<th class="title-cell" colspan="2">Opšti podaci podnosioca zahteva</th>
+		</tr>
+		</thead>
+		<tr>
+			<th width="35%">Ime i prezime</th>
+			<td>$!farmerData.firstName $!farmerData.lastName</td>
+		</tr>
+		<tr>
+			<th>Naziv preduzeća</th>
+			<td>$!farmerData.orgName</td>
+		</tr>
+		<tr>
+			<th>Adresa prebivališta/sjedišta</th>
+			<td>#if ($farmerData.address) $farmerData.address #else $!farmerData.orgAddress  #end</td>
+		</tr>
+		<tr>
+			<th>JMBG</th>
+			<td>$!farmerData.jmbg</td>
+		</tr>
+		<tr>
+			<th>Reg. broj</th>
+			<td>$!farmerData.orgRegNum</td>
+		</tr>
+		<tr>
+			<th>PIB</th>
+			<td>$!farmerData.pib</td>
+		</tr>
+		<tr>
+			<th>Broj gazdinstva (Reg. poljopriv. gazdinstava)</th>
+			<td>$!farmerData.farmId</td>
+		</tr>
+		<tr>
+			<th>Broj rješenja (iz Reg. organskih proizvođača)</th>
+			<td></td>
+		</tr>
+		<tr>
+			<th>Kontakt telefon</th>
+			<td>$!farmerData.phoneNumber $!farmerData.mobilePhoneNumber </td>
+		</tr>
+		<tr>
+			<th>Email</th>
+			<td>$!farmerData.eMail</td>
+		</tr>
+		<tr>
+			<th>Naziv banke</th>
+			<td></td>
+		</tr>
+		<tr>
+			<th>Broj računa</th>
+			<td></td>
+		</tr>
+	</table>
+</div>
+<div class="parcel-details break">
+	<table cellpadding="0" cellspacing="0">
+		<thead>
+		<tr>
+			<th colspan="9" class="title-cell">Biljna proizvodnja</th>
+		</tr>
+		<tr>
+			<th class="lpis-data">RBR</th>
+			<th class="lpis-data">Domaće ime parcele</th>
+			<th class="lpis-data">ID parcele</th>
+			<th class="lpis-data">Povrišna parcele (m<sup>2</sup>)</th>
+			<th>Tip proizvodnje</th>
+			<th>Kultura</th>
+			<th>Povrišna pod kulturom (m<sup>2</sup>)</th>
+			<th>Godina sadnje</th>
+			<th>Mere podrške</th>
+		</tr>
+		</thead>
+		<tbody>
+		#foreach($parcelAppliedForSupportMeasureData in $parcelsAppliedForSupportMeasureDataList)
+		<tr>
+			<td class="lpis-data">$foreach.count</td>
+			<td class="lpis-data">
+				#if ($parcelAppliedForSupportMeasureData.referenceParcelData)
+					#if ($parcelAppliedForSupportMeasureData.referenceParcelData.parcelName)
+						$parcelAppliedForSupportMeasureData.referenceParcelData.parcelName
+					#else
+						$parcelAppliedForSupportMeasureData.referenceParcelData.parcelId
+					#end
+				#end
+			</td>
+			<td class="lpis-data">$parcelAppliedForSupportMeasureData.referenceParcelData.parcelId</td>
+			<td class="lpis-data">$numberTool.format("#0.00", $parcelAppliedForSupportMeasureData.referenceParcelData.area)</td>
+			<td>$parcelAppliedForSupportMeasureData.typeOfPlantProduction</td>
+			<td>$parcelAppliedForSupportMeasureData.parcel.cropCoverCode - $parcelAppliedForSupportMeasureData.parcel.cropCoverName</td>
+			<td>$parcelAppliedForSupportMeasureData.parcel.inputtedArea</td>
+			<td>#if ($parcelAppliedForSupportMeasureData.parcel.plantingYear)$parcelAppliedForSupportMeasureData.parcel.plantingYear#end</td>
+			<td>
+				#foreach($agriculturalParcelEligibility in $parcelAppliedForSupportMeasureData.parcel.agriculturalParcelEligibilityDataList)
+				#if ($agriculturalParcelEligibility.supportMeasure && $agriculturalParcelEligibility.registered)
+					$agriculturalParcelEligibility.supportMeasure.code
+				#end
+				#end
+			</td>
+		</tr>
+		#end
+		</tbody>
+	</table>
+</div>
+<div class="additional-payments">
+	<table>
+		##if ($plantProductionYoungFarmer)
+		<tr>
+			<td>Podrška se zahtjeva za mladog farmera:</td>
+			<td>
+				#if($plantProductionYoungFarmer == "Y")
+					Da
+				#else
+					Ne
+				#end
+			</td>
+		</tr>
+		##end
+	</table>
+</div>
+#if ($cropAreasByTypeOfPlantProductionAndAgeMap)
+	<div class="crop-area-sums">
+		<table>
+			<thead>
+			<tr>
+				#set($numberOfColumns = $parcelSupportMeasures.size() + 1)
+				<th colspan="$numberOfColumns" class="title-cell">Sumarni podaci</th>
+			</tr>
+			<tr>
+				<th>Tip podrške</th>
+				#foreach($supportMeasure in $parcelSupportMeasures)
+					<th>$supportMeasure.supportMeasureName (m<sup>2</sup>)</th>
+				#end
+			</tr>
+			</thead>
+			<tbody>
+			#foreach($areaByGroup in $cropAreasByTypeOfPlantProductionAndAgeMap.entrySet())
+			<tr>
+				<th>$areaByGroup.key</th>
+				#foreach($supportMeasure in $parcelSupportMeasures)
+					<td>$numberTool.format("#0", $areaByGroup.value[$supportMeasure.code])</td>
+				#end
+			</tr>
+			#end
+			</tbody>
+		</table>
+	</div>
+#end
+
+<div class="support-measure-legend">
+	<table>
+		#foreach($supportMeasure in $parcelSupportMeasures)
+			<tr>
+				<th>$supportMeasure.code</th>
+				<td>- $supportMeasure.supportMeasureName</td>
+			</tr>
+		#end
+
+	</table>
+</div>
+#if($animalSupportMeasures)
+<div class="single-animals break">
+	<table>
+		<thead>
+		<tr>
+			<th class="title-cell">RBR</th>
+			<th class="title-cell">Broj ušne markice</th>
+			<th class="title-cell">Vrsta</th>
+			<th class="title-cell">Rasa</th>
+			<th class="title-cell">Pol</th>
+			<th class="title-cell">Datum rođenja</th>
+			<th class="title-cell">Zahtjevane podrške</th>
+		</tr>
+		</thead>
+		<tbody>
+		#foreach($singleAnimalPrintableData in $singleAnimalsPrintableData)
+		<tr>
+			<td>$foreach.count</td>
+			<td>$!singleAnimalPrintableData.earmark</td>
+			<td>$!singleAnimalPrintableData.animalTypeName</td>
+			<td>$!singleAnimalPrintableData.breedName</td>
+			<td>$!singleAnimalPrintableData.gender</td>
+			<td>
+				#if ($singleAnimalPrintableData.dateOfBirth)
+					$dateTool.format("dd.MM.yyyy", $singleAnimalPrintableData.dateOfBirth)
+				#end
+			</td>
+			<td>
+				#foreach($supportMeasure in $singleAnimalPrintableData.supportMeasures)
+				$supportMeasure.code
+				#end
+			</td>
+		</tr>
+		#end
+		</tbody>
+	</table>
+</div>
+
+	<div class="support-measure-legend">
+		<table>
+			#foreach($supportMeasure in $animalSupportMeasures)
+				<tr>
+					<th>$supportMeasure.code</th>
+					<td>- $supportMeasure.supportMeasureName</td>
+				</tr>
+			#end
+
+		</table>
+	</div>
+
+	<div class="animals-summary">
+		<table>
+			<thead>
+			<tr>
+				<th class="title-cell">Mera podrške</th>
+				#foreach($supportMeasure in $animalSupportMeasures)
+					<th colspan="2" class="title-cell">$supportMeasure.supportMeasureName</th>
+				#end
+			</tr>
+			<tr>
+				<th class="">Tip životinje</th>
+				#foreach($i in [1..$animalSupportMeasures.size()])
+					<th class="">Br.živ.</th>
+					<th class="">Br.UG</th>
+				#end
+			</tr>
+			</thead>
+			<tbody>
+			#foreach($animalTypeSummaryEntry in $animalTypeSupportMeasureSummaryMap.entrySet())
+			<tr>
+				<td>$animalTypeSummaryEntry.key</td>
+				#foreach($supportMeasure in $animalSupportMeasures)
+					<td>$animalTypeSummaryEntry.value[$supportMeasure.supportMeasureId].animalsCount</td>
+					<td>$numberTool.format("#0.00", $animalTypeSummaryEntry.value[$supportMeasure.supportMeasureId].conditionalAnimalsCount)</td>
+				#end
+			</tr>
+			#end
+			</tbody>
+		</table>
+	</div>
+#end
+	<div class="break"></div>
+    #if ($campaignGeneralStatement)
+	 <div class="general-statement">
+        $campaignGeneralStatement
+	 </div>
+    #end
+    #foreach($supportMeasureStatement in $supportMeasureStatements)
+        #if ($supportMeasureStatement)
+			<div class="support-measure-statement">
+				$supportMeasureStatement
+			</div>
+        #end
+    #end
+
+</div>
+</body>
+</html>

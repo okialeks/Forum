@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+
+  gsaa-mard-api-wild-fly:
+    image: timperia/wild-fly-13.0.0:10
+    container_name: gsaa-mard-api-wild-fly
+    tty: true
+    ports:
+      - "8580:8580"
+    volumes:
+      - ./../gsaa-web/target:/wildfly-13.0.0.Final/standalone/deployments
+      - ./install:/opt/install
+      - /tmp/gsaa.mard.lcl/:/wildfly-13.0.0.Final/standalone/log
+      - ~/.leadIt/mard/mard_gsaa_files/uploaded_documents:/root/mard/files/uploaded_documents
+    external_links:
+      - "postgis9.6.1-mard:POSTGIS_DATABASE_SERVER"
+      - "kafka:KAFKA_SERVER"
+    networks:
+      - default

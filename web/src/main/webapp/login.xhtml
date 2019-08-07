@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:body>
+
+	<h1>Logovanjee</h1>
+
+<!--	<h:form>-->
+<!--		<h:inputText value="#{bean.text}" required="true" />-->
+<!--		<h:selectOneMenu value="#{bean.choice}" required="true">-->
+<!--			<f:selectItem itemValue="#{null}" />-->
+<!--			<f:selectItem itemValue="One" />-->
+<!--			<f:selectItem itemValue="Two" />-->
+<!--			<f:selectItem itemValue="Three" />-->
+<!--		</h:selectOneMenu>-->
+<!--		<h:commandButton value="submit" action="#{bean.submit}" />-->
+<!--		<h:messages />-->
+<!--		<h:outputText value="#{bean.result}" />-->
+<!--	</h:form>-->
+
+	<h:form>
+		<table>
+			<tr>
+				<td>
+					Username
+				</td>
+				<td>
+					<h:inputText value="#{loginManager.username}" required="true" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Password
+				</td>
+				<td>
+					<h:inputText value="#{loginManager.password}" required="true" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align: right;">
+					<h:commandButton value="Submit" action="#{loginManager.login}" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align: right;">
+					<h:messages />
+					<h:outputText value="#{loginManager.tekstPosleLogina}" />
+				</td>
+			</tr>
+		</table>
+	</h:form>
+
+</h:body>
+</html>
