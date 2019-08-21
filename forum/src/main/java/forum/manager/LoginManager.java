@@ -3,6 +3,7 @@ package forum.manager;
 import forum.data.LoginData;
 import forum.databese.User;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 
 import javax.inject.Inject;
@@ -21,6 +22,11 @@ public class LoginManager {
 
 	private String tekstPosleLogina;
 
+	@PostConstruct
+	public void init(){
+		username = "aaaa";
+		password = "aaaa";
+	}
 
 	public void login(){
 
