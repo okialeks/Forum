@@ -19,14 +19,14 @@
 <!--		<h:outputText value="#{bean.result}" />-->
 <!--	</h:form>-->
 
-	<h:form>
+	<h:form rendered="#{!sessionData.login}">
 		<table>
 			<tr>
 				<td>
 					Username
 				</td>
 				<td>
-					<h:inputText value="#{loginManager.username}" required="true" />
+					<h:inputText value="#{loginManager.loginData.username}" required="true" />
 				</td>
 			</tr>
 			<tr>
@@ -34,7 +34,7 @@
 					Password
 				</td>
 				<td>
-					<h:inputText value="#{loginManager.password}" required="true" />
+					<h:inputText value="#{loginManager.loginData.password}" required="true" />
 				</td>
 			</tr>
 			<tr>
@@ -49,6 +49,10 @@
 				</td>
 			</tr>
 		</table>
+	</h:form>
+
+	<h:form rendered="#{sessionData.login}">
+		Logout: <h:commandButton value="Logout" action="#{loginManager.logout}" />
 	</h:form>
 
 </h:body>

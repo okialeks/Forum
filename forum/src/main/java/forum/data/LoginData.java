@@ -1,14 +1,14 @@
 package forum.data;
 
+import javax.enterprise.context.Dependent;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
 @Named
+@RequestScoped
 public class LoginData {
 	private String username;
 	private String password;
-
-
-
 
 
 

@@ -1,6 +1,7 @@
 package forum.manager;
 
 import forum.data.LoginData;
+import forum.data.SessionData;
 import forum.databese.User;
 
 import javax.annotation.PostConstruct;
@@ -13,32 +14,42 @@ import javax.inject.Named;
 @RequestScoped
 public class LoginManager {
 
-//	@Inject
+	@Inject
 	private LoginData loginData;
 
-	private String username;
-	private String password;
+	@Inject
+	private SessionData sessionData;
 
 
 	private String tekstPosleLogina;
 
 	@PostConstruct
 	public void init(){
-		username = "aaaa";
-		password = "aaaa";
+
 	}
 
 	public void login(){
 
-		tekstPosleLogina = "Uspesno ulogovano. Unet username: "+username+" Unet password: "+password;
+
+		if (loginData.getUsername().trim().equals("orelj") && loginData.getPassword().trim().equals("orelj")){
+
+			sessionData.setLogin(true);
+
+			tekstPosleLogina = "Uspesno ulogovano. Unet username: "+loginData.getUsername()+" Unet password: "+loginData.getPassword();
 
 
+		}else{
+			tekstPosleLogina = "Uneti podaci nisu ispravni. Unet username: "+loginData.getUsername()+" Unet password: "+loginData.getPassword();
+		}
 
-
-		User user = new User();
+//		User user = new User();
 
 	}
 
+	public void logout(){
+		sessionData.setLogin(false);
+		sessionData.setUser(null);
+	}
 
 
 	public LoginData getLoginData() {
@@ -57,19 +68,4 @@ public class LoginManager {
 		this.tekstPosleLogina = tekstPosleLogina;
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
 }
